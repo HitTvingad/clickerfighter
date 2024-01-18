@@ -5,14 +5,17 @@ using UnityEngine.UI;
 
 public class CurrencyOnClick : MonoBehaviour
 {
-    
+    int fistpoints = 0;
+    Button CurrencyButton;
+
+
     void Start()
     {
-        Button CurrencyButton = GetComponent("The Currency Button") as Button;
+         CurrencyButton = GetComponent("The Currency Button") as Button;
     }
-    
-    public int AddCurrency()
+
+    public void AddCurrency()
     {
-        
+        fistpoints++;
     }
 }
