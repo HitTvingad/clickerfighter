@@ -312,7 +312,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 195978221}
         m_TargetAssemblyTypeName: CurrencyOnClick, Assembly-CSharp
-        m_MethodName: AddCurrency
+        m_MethodName: addCurrency
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -372,6 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb3b6dab28a63a54d8d788acff5350e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  amountOfCurrency: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,7 +773,7 @@ GameObject:
   - component: {fileID: 1629022215}
   - component: {fileID: 1629022214}
   m_Layer: 5
-  m_Name: Amount of Currency
+  m_Name: Amount Of Currency
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
