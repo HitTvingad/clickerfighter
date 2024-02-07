@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopScript : MonoBehaviour
+public class ShopScript : CurrencyOnClick
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    
 
-    // Update is called once per frame
-    void Update()
+    //Is attatched to the shopping buttons
+   /* public void moreFistPower()
+    
     {
-        
+        if (fistpoints == 10)
     }
+   */
 }
