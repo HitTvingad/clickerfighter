@@ -6,9 +6,36 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
-
+public enum Weapons
+{
+    Unarmed,
+    BoxingGlove,
+    Dusters,
+    total
+}
 public class CurrencyOnClick : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI amountOfCurrency;
+    Weapons weaponsHeld = Weapons.Unarmed;
+
+
+    public void Update()
+    {
+        amountOfCurrency.text = "You have " + fistpoints.ToString() + " amount of Fistpoints!";
+    }
+    //Ivar Sakerna. Lite goofy
+    public void WeaponUpgrade()
+    {
+        Debug.Log("buton");
+        if (fistpoints >= 10)
+        {
+            weaponsHeld = Weapons.BoxingGlove;
+            Debug.Log("Glove");
+        }
+    }
+    //Ivar Sakerna. Lite goofy
+
+    public int fistpoints = 0;
     int damage = 1;
     int fistpoints = 0;
     int GhostFists = 0;
@@ -41,13 +68,13 @@ public class CurrencyOnClick : MonoBehaviour
 
     public void addCurrency()
     {
-        fistpoints++;
-        amountOfCurrency.text = "You have " + fistpoints + " amount of Fistpoints!";
+        fistpoints += 1 + (int)weaponsHeld;
+
         Debug.Log("You pressed the button!");
     }
 
-    // hitta något sätt att instantiate-a ghostfists
-    // genom att göra en referens till komponenter först
+    // hitta nï¿½got sï¿½tt att instantiate-a ghostfists
+    // genom att gï¿½ra en referens till komponenter fï¿½rst
     public void addGhostFists()
     {
         if (fistpoints >= BaseCost) 
