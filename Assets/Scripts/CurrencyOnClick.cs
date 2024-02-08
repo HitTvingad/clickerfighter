@@ -4,6 +4,7 @@ using System.Xml.Schema;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 public enum Weapons
@@ -17,6 +18,9 @@ public class CurrencyOnClick : MonoBehaviour
 {
     [SerializeField] Sprite punchedSprite;
     [SerializeField] Sprite unpunchedSprite;
+
+    [SerializeField] GameObject fistR;
+    [SerializeField] GameObject fistL;
 
     [SerializeField] TextMeshProUGUI amountOfCurrency;
     Weapons weaponsHeld = Weapons.Unarmed;
@@ -47,6 +51,7 @@ public class CurrencyOnClick : MonoBehaviour
     int BaseCost = 10;
     int ghostCost = 10;
     int BaseManHealth = 10;
+    bool LastPunchRight = true;
 
     [SerializeField] TextMeshProUGUI purchaseText;
     [SerializeField] GameObject phantomFist;
@@ -68,20 +73,41 @@ public class CurrencyOnClick : MonoBehaviour
         BaseManHealth = BaseManHealth - damage;
     }
 
+    private Coroutine spriteCoroutine;
     public void addCurrency()
     {
         fistpoints += 1 + (int)weaponsHeld;
         Debug.Log("You pressed the button!");
-
+        if (LastPunchRight == true)
+        {
+            fistL.SetActive(true);
+        }
+        else
+        {
+            fistR.SetActive(true);
+        }
         UnityEngine.UI.Image imageComponent = gameObject.GetComponent<UnityEngine.UI.Image>();
         imageComponent.sprite = punchedSprite;
-        Invoke("NotPunched", 2f);
+        if (spriteCoroutine == null)
+            spriteCoroutine = StartCoroutine(returnToNormal());
     }
 
-    private void NotPunched()
+    private IEnumerator returnToNormal()
     {
+        yield return new WaitForSeconds(0.4f);
         UnityEngine.UI.Image imageComponent = gameObject.GetComponent<UnityEngine.UI.Image>();
         imageComponent.sprite = unpunchedSprite;
+        if (LastPunchRight == true)
+        {
+            fistL.SetActive(false);
+            LastPunchRight = false;
+        }
+        else
+        {
+            fistR.SetActive(false);
+            LastPunchRight = true;
+        }
+        spriteCoroutine = null;
     }
 
     // hitta n�got s�tt att instantiate-a ghostfists
