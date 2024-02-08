@@ -37,15 +37,12 @@ public class CurrencyOnClick : MonoBehaviour
 
     public int fistpoints = 0;
     int damage = 1;
-    int fistpoints = 0;
     int GhostFists = 0;
     int DoTheDamage = 0;
-
     int totaldamage = 0;
     int BaseCost = 10;
     int BaseManHealth = 10;
 
-    [SerializeField] TextMeshProUGUI amountOfCurrency;
     [SerializeField] TextMeshProUGUI purchaseText;
     [SerializeField] GameObject phantomFist;
     
@@ -79,7 +76,7 @@ public class CurrencyOnClick : MonoBehaviour
     {
         if (fistpoints >= BaseCost) 
         {
-            static Object Instantiate(GameObject phantomFist, Vector3   );
+             Instantiate(phantomFist, transform.position, Quaternion.identity);
         }
         else
         {
