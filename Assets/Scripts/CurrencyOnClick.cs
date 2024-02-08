@@ -15,13 +15,17 @@ public enum Weapons
 }
 public class CurrencyOnClick : MonoBehaviour
 {
+    [SerializeField] Sprite punchedSprite;
+    [SerializeField] Sprite unpunchedSprite;
+
     [SerializeField] TextMeshProUGUI amountOfCurrency;
     Weapons weaponsHeld = Weapons.Unarmed;
-
 
     public void Update()
     {
         amountOfCurrency.text = "You have " + fistpoints.ToString() + " amount of Fistpoints!";
+
+        Debug.Log(fistpoints);
     }
     //Ivar Sakerna. Lite goofy
     public void WeaponUpgrade()
@@ -41,6 +45,7 @@ public class CurrencyOnClick : MonoBehaviour
     int DoTheDamage = 0;
     int totaldamage = 0;
     int BaseCost = 10;
+    int ghostCost = 10;
     int BaseManHealth = 10;
 
     [SerializeField] TextMeshProUGUI purchaseText;
@@ -66,21 +71,29 @@ public class CurrencyOnClick : MonoBehaviour
     public void addCurrency()
     {
         fistpoints += 1 + (int)weaponsHeld;
-
         Debug.Log("You pressed the button!");
+
+        UnityEngine.UI.Image imageComponent = gameObject.GetComponent<UnityEngine.UI.Image>();
+        imageComponent.sprite = punchedSprite;
+        Invoke("NotPunched", 2f);
+    }
+
+    private void NotPunched()
+    {
+        UnityEngine.UI.Image imageComponent = gameObject.GetComponent<UnityEngine.UI.Image>();
+        imageComponent.sprite = unpunchedSprite;
     }
 
     // hitta n�got s�tt att instantiate-a ghostfists
     // genom att g�ra en referens till komponenter f�rst
     public void addGhostFists()
     {
-        if (fistpoints >= BaseCost) 
+        if (fistpoints >= ghostCost) 
         {
              Instantiate(phantomFist, transform.position, Quaternion.identity);
-        }
-        else
-        {
-
+            GhostFists += 1;
+            fistpoints -= ghostCost;
+            ghostCost += 5;
         }
     }
 
